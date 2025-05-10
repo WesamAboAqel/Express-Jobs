@@ -12,5 +12,23 @@ export const Query = {
     getCompany: "SELECT * FROM company WHERE company.id = $1",
     updateCompany: `UPDATE  company
                     SET name = $1, description = $2, contactemail = $3, contactphone = $4
-                    WHERE id = (SELECT company_id FROM jobs WHERE id = $5)`
+                    WHERE id = (SELECT company_id FROM jobs WHERE id = $5)`,
+    initializeJobs:`CREATE TABLE IF NOT EXISTS jobs (
+                    id SERIAL PRIMARY KEY,
+                    title VARCHAR(255),
+                    type VARCHAR(255),
+                    description TEST,
+                    location VARCHAR(255),
+                    salary VARCHAR(255),
+                    company_id INT,
+                    FOREIGN KEY (company_id) REFERENCES company(id)
+                    );`,
+    initializeCompany:`CREATE TABLE IF NOT EXISTS company(
+                      id SERIAL PRIMARY KEY,
+                      name VARCHAR(255),
+                      description TEXT,
+                      contactemail VARCHAR(255),
+                      contactphone VARCHAR(255)
+                      );`
+    
 }

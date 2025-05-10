@@ -102,3 +102,15 @@ export const updateJobandCompany = (request,response) => {
     })
     
 }
+
+export const initTables = async () => {
+    try{
+        await pool.query(Query.initalizeCompany)
+        await pool.query(Query.initializeJobs)
+    }
+    catch(error){
+        if(error) throw error
+    }
+    console.log('Company was initialized Successfully')
+    console.log('Jobs was initialized Successfully')
+}
