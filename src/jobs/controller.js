@@ -105,7 +105,7 @@ export const updateJobandCompany = (request,response) => {
 
 export const initTables = async () => {
     try{
-        await pool.query(Query.initalizeCompany)
+        await pool.query(Query.initializeCompany)
         await pool.query(Query.initializeJobs)
     }
     catch(error){

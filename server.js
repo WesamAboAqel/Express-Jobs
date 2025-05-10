@@ -4,7 +4,7 @@ import logger from './src/middleware/logger.js';
 import cors from 'cors';
 import { initTables } from './src/jobs/controller.js';
 
-port = process.env.PORT || 8080
+const port = process.env.PORT || 8080
 const app = express();
 app.use(express.json());
 
