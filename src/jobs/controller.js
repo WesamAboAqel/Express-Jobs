@@ -45,9 +45,9 @@ export const updateJob = (request,response) => {
 }
 
 export const addCompany = (request,response) => {
-    const {name,description,contactemail,contactphone} = request.body;
+    const {name,companydescription,contactemail,contactphone} = request.body;
 
-    pool.query(Query.addCompany, [name,description,contactemail,contactphone], (error,results) => {
+    pool.query(Query.addCompany, [name, companydescription, contactemail, contactphone], (error,results) => {
         if(error)throw error;
         return response.status(201).json(results.rows[0].id)
     })
@@ -74,6 +74,7 @@ export const getCompany = (request,response) => {
     const id = parseInt(request.params.id);
     pool.query(Query.getCompany, [id], (error,results) => {
         if(error) throw error;
+        
         return response.status(200).json(results.rows)
     })
 }
@@ -91,11 +92,12 @@ export const updateCompany = (request,response) => {
 export const updateJobandCompany = (request,response) => {
     const { updatedJob: job, updatedCompany: company } = request.body
     const {id, title, type, description, location,salary} = job
-    const {name, description2,contactemail, contactphone} = company
+    const {name, companydescription, contactemail, contactphone} = company
+    console.log(company)
     pool.query(Query.updateJob, [title,type,description, location, salary, id], (error,results) => {
         if(error) throw error;
 
-        pool.query(Query.updateCompany, [name, description2, contactemail, contactphone, id], (error,results) => {
+        pool.query(Query.updateCompany, [name, companydescription, contactemail, contactphone, id], (error,results) => {
             if(error) throw error;
         })
         response.status(201).send(`The Job with id: ${id} was Updated Successfully`)

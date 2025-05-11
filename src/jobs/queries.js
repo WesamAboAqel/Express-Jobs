@@ -6,12 +6,12 @@ export const Query = {
     updateJob: `UPDATE jobs 
                 SET title = $1, type = $2, description = $3, location = $4, salary = $5 
                 WHERE id = $6`,
-    addCompany: "INSERT INTO company (name,description,contactemail,contactphone) VALUES ($1,$2,$3,$4) RETURNING id",
+    addCompany: "INSERT INTO company (name,companydescription,contactemail,contactphone) VALUES ($1,$2,$3,$4) RETURNING id",
     getCompanies: "SELECT * FROM company",
     deleteCompany: "DELETE FROM company WHERE id = $1",
     getCompany: "SELECT * FROM company WHERE company.id = $1",
     updateCompany: `UPDATE  company
-                    SET name = $1, description = $2, contactemail = $3, contactphone = $4
+                    SET name = $1, companydescription = $2, contactemail = $3, contactphone = $4
                     WHERE id = (SELECT company_id FROM jobs WHERE id = $5)`,
     initializeJobs:`CREATE TABLE IF NOT EXISTS jobs (
                     id SERIAL PRIMARY KEY,
@@ -26,7 +26,7 @@ export const Query = {
     initializeCompany:`CREATE TABLE IF NOT EXISTS company(
                       id SERIAL PRIMARY KEY,
                       name VARCHAR(255),
-                      description TEXT,
+                      companydescription TEXT,
                       contactemail VARCHAR(255),
                       contactphone VARCHAR(255)
                       );`
